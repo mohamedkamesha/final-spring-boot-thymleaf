@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://thymeleaf.org ">
+<head>
+    <meta charset="utf-8">
+    <title>Add a job</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="form.css">
+</head>
+
+<body>
+<div class="body">
+    <form action="#" th:action="@{/saveJob}" th:object="${company}" method="post">
+        <div class="container">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <p class="h1 py-2">Add Job</p>
+
+                    </p>
+                </div>
+                <div class="form-row">
+                    <input class="form-control" type="text" placeholder="Job Name" th:field="*{jobName}">
+                </div>
+
+                <div class="form-group py-3">
+                    <input type="text" class="form-control" placeholder="Job Time" th:field="*{jobTime}">
+                </div> <!-- form-group end.// -->
+
+                <div class="form-row py-2">
+                    <input class="form-control" type="text" placeholder="Requirements" th:field="*{requirements}">
+                </div>
+
+                <div class="form-group py-3">
+                    <input type="text" class="form-control" placeholder="Experiences" th:field="*{experience}">
+                </div> <!-- form-group end.// -->
+
+                <div class="form-row py-2">
+                    <input class="form-control" type="text" placeholder="Description" th:field="*{description}">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit"
+                            style="width: 150px; font-weight: bold; font-size: large; margin-left: 67%; margin-top: 4%; background-color: #2A525C; color:white;"
+                            class="btn btn-primary btn-block"> Submit
+                        <i class="bx bx-right-arrow-alt" style="font-weight: bold"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <a th:href="@{/}" class="btn btn-primary btn-sm mb-3"> Back To Home </a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

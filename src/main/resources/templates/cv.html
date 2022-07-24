@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://thymeleaf.org ">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        .header {
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            padding: 0 5%;
+            width: 100%;
+            display: flex;
+            background-color: #fff;
+            justify-content: space-between;
+        }
+        
+        .header__logo {
+            display: flex;
+            align-items: center;
+            padding: 20px 10px;
+        }
+        
+        .header__logo img {
+            width: 130px;
+        }
+        
+        .header__items {
+            display: flex;
+            margin: 0 80px 0 40px;
+        }
+        
+        .header__items__item {
+            padding: 0 10px;
+            margin: 0 2px;
+            text-decoration: none;
+            color: #000;
+            font-size: 1rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            transition: 0s;
+        }
+        
+        .header__items__item::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #0d6efd;
+            transform: translate(-50%, -8px) rotate(45deg);
+            transition: 0.3s cubic-bezier(0.55, 0.17, 0.05, 0.85);
+            opacity: 0;
+            top: -5px;
+            left: 50%;
+        }
+        
+        .header__items__item:hover,
+        .header__items__item.active,
+        .header__items__item.router-link-active {
+            color: #0d6efd;
+            transition: 0.1s;
+            border-bottom: 3px solid #0d6efd;
+        }
+        
+        .header__items__item:hover::before,
+        .header__items__item.active::before,
+        .header__items__item.router-link-active::before {
+            z-index: 1;
+            opacity: 1;
+            transform: translate(-50%, 0) rotate(45deg);
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <!-- v-if="!authorize" 
+    <div class="header">
+        <div class="header__logo">
+            <a href="/">
+                <img src="img/logo.jpeg">
+            </a>
+        </div>
+        <div class="header__items">
+            <a href="/" exact class="header__items__item"><i class="fas fa-home me-2"></i> Home</a>
+            <a href="/login" class="header__items__item"><i class="fas fa-sign-in me-2"></i> Login</a>
+            <a href="/register" class="header__items__item"><i class="fas fa-user me-2"></i> Register</a>
+        </div>
+    </div>
+
+     v-else-if="authorize && type === 'applicant'" 
+    <div class="header" style="margin-top: 70px">
+        <div class="header__logo">
+            <a href="/">
+                <img src="img/logo.jpeg">
+            </a>
+        </div>
+        <div class="header__items">
+            <a href="/" exact class="header__items__item"><i class="fas fa-home me-2"></i> Home</a>
+            <a href="/jobs" class="header__items__item"><i class="fas fa-tasks-alt me-2"></i> Jobs</a>
+            <a href="/companies" class="header__items__item"><i class="fas fa-building me-2"></i> Companies</a>
+            <a href="/profile" class="header__items__item"><i class="fas fa-user me-2"></i> Profile</a>
+            <span class="header__items__item"><i class="fas fa-sign-in me-2"></i> Logout</span>
+        </div>
+    </div>
+     v-else-if="authorize && type === 'company'"  -->
+    <div class="header" style="margin-top: 20px">
+        <div class="header__logo">
+            <a href="/">
+                <img src="img/logo.jpeg">
+            </a>
+        </div>
+        <div class="header__items">
+            <a href="#" th:href = "@{/}" exact class="header__items__item"><i class="fas fa-home me-2"></i> Home</a>
+            <a href="#" th:href = "@{/add_job}" class="header__items__item"><i class="fas fa-chart-line me-2"></i> add new job</a>
+            <a href="#" th:href = "@{/seePost}" class="header__items__item"> <i class="fas fa-user me-2"></i> see applicant post </a>
+            <span class="header__items__item"><i class="fas fa-sign-in me-2"></i> <a th:href = "@{/login}"> Logout </a></span>
+        </div>
+
+    </div>
+<br><br><br><br>
+    <div  class="container my-2" style="alignment: bottom">
+        <h1>Cv List</h1>
+        <table border="1" class = "table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>cv id</th>
+                <th>cv Name</th>
+                <th>cv JopApplyStatus</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+
+            <tr th:each="cv : ${cvs}">
+                <td th:text="${cv.id}"></td>
+                <td th:text="${cv.cvName}"></td>
+                <td th:text="${cv.jopApplyStatus}"></td>
+                <td> <a th:href="@{/files/{name}(name=${cv.cvName})}"  target="_blank">download cv</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+</body>
+
+</html>
